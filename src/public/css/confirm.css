@@ -1,0 +1,100 @@
+/* 基本設定 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-size: 24px;
+    color: #8c7b6b;
+    margin: 0;
+}
+
+header h2 {
+    font-size: 18px;
+    color: #8c7b6b;
+    margin: 0;
+    font-weight: normal;
+}
+
+/* フォーム */
+.contact-form .form-group {
+    margin-bottom: 15px;
+}
+
+.contact-form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.contact-form .required {
+    color: red;
+    font-size: 12px;
+}
+
+.contact-form input, .contact-form textarea, .contact-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.contact-form .name-fields, .contact-form .phone-fields {
+    display: flex;
+    gap: 10px;
+}
+
+.contact-form .name-fields input, .contact-form .phone-fields input {
+    flex: 1;
+}
+
+.contact-form .phone-fields span {
+    display: inline-block;
+    line-height: 36px;
+    margin: 0 5px;
+}
+
+.contact-form .gender-options label {
+    margin-right: 15px;
+    font-weight: normal;
+}
+
+.contact-form .gender-options input {
+    margin-right: 5px;
+}
+
+.contact-form .submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #8c7b6b;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.contact-form .submit-btn:hover {
+    background-color: #755c4c;
+}
