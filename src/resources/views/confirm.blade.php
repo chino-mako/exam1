@@ -58,7 +58,7 @@
         </table>
 
         <div class="actions">
-            <form action="{{ route('contact.thanks') }}" method="POST">
+            <form action="{{ route('contact.confirm') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn-submit">送信</button>
             </form>

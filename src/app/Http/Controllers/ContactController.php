@@ -17,22 +17,22 @@ class ContactController extends Controller
     //確認画面
     public function confirm(ContactRequest $request)
     {
-
         // 電話番号を結合
         $tel = $request->tel1 . '-' . $request->tel2 . '-' . $request->tel3;
 
-        $data = $request->all();
-        // データに電話番号を含めて確認画面に渡す
-        $data['tel'] = $tel;
+        // バリデーション済みのデータを取得
+        $validated = $request->validated();
+
+        // データに電話番号を追加
+        $validated['tel'] = $tel;
+
         // デフォルト値を補完
-        if (!isset($data['building'])) {
-            $data['building'] = '（入力なし）';
-
-            $validated = $request->validated(); // バリデーション済みデータを取得
-
-            // 確認画面に遷移
-            return view('confirm', ['data' => $validated]);
+        if (!isset($validated['building'])) {
+            $validated['building'] = '（入力なし）';
         }
+
+        // 確認画面に遷移
+        return view('confirm', ['data' => $validated]);
     }
 
     public function edit()
@@ -63,6 +63,6 @@ class ContactController extends Controller
         // データベースに保存
         Contact::create($validated);
 
-        return redirect()->route('thanks');
+        return redirect()->route('contact.thanks');
     }
 }

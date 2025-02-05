@@ -17,6 +17,15 @@
             <h2>Contact</h2>
         </header>
 
+        @if ($errors->any())
+        <div class="error-messages">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         <form action="{{ route('contact.confirm') }}" method="POST" class="contact-form">
             @csrf
             <div class="form-group">
@@ -41,8 +50,8 @@
                 <label for="gender">性別 <span class="required">※</span></label>
                 <div class="gender-options">
                     <label><input type="radio" name="gender" value="male" required> 男性</label>
-                    <label><input type="radio" name="gender" value="female" required> 女性</label>
-                    <label><input type="radio" name="gender" value="other" required> その他</label>
+                    <label><input type="radio" name="gender" value="female"> 女性</label>
+                    <label><input type="radio" name="gender" value="other"> その他</label>
                     <div class="form__error">
                         @error('gender')
                         {{ $message }}

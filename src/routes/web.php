@@ -57,12 +57,17 @@ Route::post('/logout', function () {
 Route::get('/contact', [ContactController::class, 'contact'])->name('contact.contact');
 
 //お問い合わせ内容確認画面
-Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('contact.confirm');
+Route::post('/contact/confirm', [ContactController::class, 'confirm'])->middleware('auth')->name('contact.confirm');
 
-//サンクスページ
-Route::post('/contact/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
+
+// お問い合わせ内容を保存し、サンクスページへリダイレクト
+Route::post('/contact/thanks', [ContactController::class, 'store'])->name('contact.store');
 
 // サンクスページの表示
-Route::get('/thanks', function () {
+Route::get('/contact/thanks', function () {
     return view('thanks');
-})->name('thanks');
+})->name('contact.thanks');
+
+Route::get('/home', function () {
+    return view('contact');
+})->name('home');
