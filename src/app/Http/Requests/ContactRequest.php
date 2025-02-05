@@ -30,8 +30,10 @@ class ContactRequest extends FormRequest
             'email' => ['required', 'email'],
             'tel' => ['required', 'alpha_num', 'max:5'],
             'address' => ['required'],
-            'detail' => ['required'],
-            'content' => ['required', 'max:120'],
+            'building' => 'nullable|string|max:255',
+
+            'content' => ['required'],
+            'detail' => ['required', 'max:120'],
         ];
     }
 
@@ -47,9 +49,9 @@ class ContactRequest extends FormRequest
             'tel.alpha_num' => '電話番号は5桁までの数字で入力してください',
             'tel.max' => '電話番号は5桁までの数字で入力してください',
             'address.required' => '住所を入力してください',
-            'detail.required' => 'お問い合わせの種類を選択してください',
-            'content.required' => 'お問合せ内容を入力してください',
-            'content.max' => 'お問合せ内容は120文字いないで入力してください',
+            'content.required' => 'お問い合わせの種類を選択してください',
+            'detail.required' => 'お問合せ内容を入力してください',
+            'detail.max' => 'お問合せ内容は120文字以内で入力してください',
         ];
     }
 }

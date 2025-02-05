@@ -11,8 +11,8 @@ class Contact extends Model
 
     protected $fillable = [
         'category_id',
-        'first-name',
-        'last-name',
+        'first_name',
+        'last_name',
         'gender',
         'email',
         'tel',

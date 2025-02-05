@@ -17,11 +17,22 @@ class ContactController extends Controller
     //確認画面
     public function confirm(ContactRequest $request)
     {
-        //フォームデータを取得
-        $data = $request->all();
 
-        //確認画面に遷移
-        return view('confirm', compact('data'));
+        // 電話番号を結合
+        $tel = $request->tel1 . '-' . $request->tel2 . '-' . $request->tel3;
+
+        $data = $request->all();
+        // データに電話番号を含めて確認画面に渡す
+        $data['tel'] = $tel;
+        // デフォルト値を補完
+        if (!isset($data['building'])) {
+            $data['building'] = '（入力なし）';
+
+            $validated = $request->validated(); // バリデーション済みデータを取得
+
+            // 確認画面に遷移
+            return view('confirm', ['data' => $validated]);
+        }
     }
 
     public function edit()
@@ -31,12 +42,27 @@ class ContactController extends Controller
     }
 
     //サンクス画面
-    public function thanks(Request $request)
+    public function store(Request $request)
     {
-        //データベースに保存
-        Contact::create($request->all());
+        // 電話番号を結合して保存用データを作成
+        $data = $request->all();
+        $data['tel'] = $request->tel1 . '-' . $request->tel2 . '-' . $request->tel3;
 
-        //完了画面を表示
-        return redirect('thanks');
+        $validated = $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'gender' => 'required',
+            'email' => 'required|email',
+            'tel' => 'nullable|string',
+            'address' => 'nullable|string',
+            'building' => 'nullable|string',
+            'content' => 'required|string',
+            'detail' => 'required|string',
+        ]);
+
+        // データベースに保存
+        Contact::create($validated);
+
+        return redirect()->route('thanks');
     }
 }

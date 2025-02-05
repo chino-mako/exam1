@@ -15,8 +15,6 @@ class ContactSeeder extends Seeder
      */
     public function run()
     {
-        Contact::factory()->count(35)->create(); // 35件のダミーデータを生成
-
-        
+        Contact::factory()->count(10)->create();
     }
 }

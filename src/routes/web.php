@@ -40,14 +40,12 @@ Route::get('/login', [LoginController::class, 'show'])->name('login');
 Route::post('/login', [LoginController::class, 'login'])->name('login.perform');
 
 // 管理画面の表示
-Route::get('/admin', function () {
-    $users = User::all(); // ユーザーデータを取得
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index')->middleware('auth');
 
-    // admin.blade.php を返す
-    return view('admin', compact('users'));
 
-    // ログイン状態でのみアクセス可能
-})->name('admin')->middleware('auth');
+//お問合せデータをCSVファイルとしてエクスポート
+Route::get('/admin/export', [AdminController::class, 'export'])->name('admin.export');
+
 
 // ログアウト処理
 Route::post('/logout', function () {
@@ -63,3 +61,8 @@ Route::post('/contact/confirm', [ContactController::class, 'confirm'])->name('co
 
 //サンクスページ
 Route::post('/contact/thanks', [ContactController::class, 'thanks'])->name('contact.thanks');
+
+// サンクスページの表示
+Route::get('/thanks', function () {
+    return view('thanks');
+})->name('thanks');

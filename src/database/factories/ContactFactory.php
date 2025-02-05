@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Contact;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class ContactFactory extends Factory
@@ -11,18 +13,25 @@ class ContactFactory extends Factory
      *
      * @return array
      */
+    protected $model = Contact::class;
+
     public function definition()
     {
+        $faker = \Faker\Factory::create('ja_JP'); // 日本のデータを生成
+
         return [
-            'category_id' => $this->faker->numberBetween(1, 5), // カテゴリID（1〜5の範囲でランダム）
-            'first_name' => $this->faker->firstName(),         // 名前
-            'last_name' => $this->faker->lastName(),           // 苗字
-            'gender' => $this->faker->randomElement(['1', '2']), // 性別 男性=1, 女性=2
-            'email' => $this->faker->unique()->safeEmail(),    // メールアドレス
-            'tel' => $this->faker->phoneNumber(),              // 電話番号
-            'address' => $this->faker->address(),              // 住所
-            'building' => $this->faker->secondaryAddress(),    // 建物名
-            'detail' => $this->faker->text(120),               // 問い合わせ内容
+            'first_name' => $faker->firstName, // 日本の名前
+            'last_name' => $faker->lastName,   // 日本の苗字
+            'gender' => $faker->randomElement(['male', 'female', 'other']),
+            'email' => $faker->safeEmail, // 日本語のメール風のデータ
+            'tel' => $faker->phoneNumber,
+            'address' => $faker->address,
+            'building' => $faker->secondaryAddress,
+            'detail' => $faker->realText(50), // お問い合わせ内容
+            'category_id' =>
+            Category::pluck('id')->random(),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

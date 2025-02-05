@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FashionablyLate</title>
+    <!-- CSSファイルをリンク -->
+    <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/confirm.css') }}">
 </head>
 
 <body>
@@ -42,24 +45,24 @@
             </tr>
             <tr>
                 <th>建物名</th>
-                <td>{{ $data['building'] }}</td>
+                <td>{{ $data['building'] ?? '（入力なし）' }}</td>
             </tr>
             <tr>
                 <th>お問い合わせの種類</th>
-                <td>{{ $data['detail'] }}</td>
+                <td>{{ $data['content'] }}</td>
             </tr>
             <tr>
                 <th>お問い合わせ内容</th>
-                <td>{{ $data['content'] }}</td>
+                <td>{{ $data['detail'] }}</td>
             </tr>
         </table>
 
         <div class="actions">
-            <form action="{{ route('thanks') }}" method="POST">
+            <form action="{{ route('contact.thanks') }}" method="POST">
                 @csrf
                 <button type="submit" class="btn-submit">送信</button>
             </form>
-            <form action="{{ route('contact') }}" method="GET">
+            <form action="{{ route('contact.contact') }}" method="GET">
                 <button type="submit" class="btn-edit">修正</button>
             </form>
         </div>

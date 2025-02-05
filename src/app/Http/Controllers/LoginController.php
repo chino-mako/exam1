@@ -24,7 +24,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             // 管理画面へリダイレクト
-            return redirect()->route('admin');
+            return redirect()->route('admin.index');
         }
 
         logger()->error('Login failed for:', $credentials);

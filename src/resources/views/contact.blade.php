@@ -64,23 +64,25 @@
             <div class="form-group">
                 <label for="tel">電話番号 <span class="required">※</span></label>
                 <div class="tel-fields">
-                    <input type="text" name="tel" placeholder="080" maxlength="3" value="{{old('tel')}}" />
+                    <input type="text" name="tel1" placeholder="080" maxlength="3" value="{{ old('tel1') }}" />
                     <span>-</span>
                     <div class="form__error">
-                        @error('tel')
+                        @error('tel1')
                         {{ $message }}
                         @enderror
                     </div>
-                    <input type="text" name="tel" placeholder="1234" maxlength="4" value="{{old('tel')}}" />
+
+                    <input type="text" name="tel2" placeholder="1234" maxlength="4" value="{{ old('tel2') }}" />
                     <span>-</span>
                     <div class="form__error">
-                        @error('tel')
+                        @error('tel2')
                         {{ $message }}
                         @enderror
                     </div>
-                    <input type="text" name="tel" placeholder="5678" maxlength="4" value="{{old('tel')}}" />
+
+                    <input type="text" name="tel3" placeholder="5678" maxlength="4" value="{{ old('tel3') }}" />
                     <div class="form__error">
-                        @error('tel')
+                        @error('tel3')
                         {{ $message }}
                         @enderror
                     </div>
@@ -99,22 +101,22 @@
 
             <div class="form-group">
                 <label for="building">建物名</label>
-                <input type="text" id="building" name="building" placeholder="例: 千駄ヶ谷マンション101">
+                <input type="text" id="building" name="building" placeholder="例: 千駄ヶ谷マンション101" value="{{ old('building') }}">
             </div>
 
             <div class="form-group">
                 <label for="inquiry_type">お問い合わせの種類 <span class="required">※</span></label>
-                <select id="inquiry_type" name="content" value="{{old('detail')}}" />
-                <option value="">選択してください</option>
-                <option value="delivery">商品のお届けについて</option>
-                <option value="exchange">商品の交換について</option>
-                <option value="trouble">商品トラブル</option>
-                <option value="contact">ショップへのお問い合わせ</option>
-                <option value="els">その他</option>
+                <select id="inquiry_type" name="content">
+                    <option value="">選択してください</option>
+                    <option value="delivery" {{ old('content') === 'delivery' ? 'selected' : '' }}>商品のお届けについて</option>
+                    <option value="exchange" {{ old('content') === 'exchange' ? 'selected' : '' }}>商品の交換について</option>
+                    <option value="trouble" {{ old('content') === 'trouble' ? 'selected' : '' }}>商品トラブル</option>
+                    <option value="contact" {{ old('content') === 'contact' ? 'selected' : '' }}>ショップへのお問い合わせ</option>
+                    <option value="els" {{ old('content') === 'els' ? 'selected' : '' }}>その他</option>
                 </select>
 
                 <div class="form__error">
-                    @error('detail')
+                    @error('content')
                     {{ $message }}
                     @enderror
                 </div>
@@ -122,9 +124,9 @@
 
             <div class="form-group">
                 <label for="detail">お問い合わせ内容 <span class="required">※</span></label>
-                <textarea id="detail" name="detail" rows="5" placeholder="お問い合わせ内容をご記載ください" value="{{old('content')}}" /></textarea>
+                <textarea id="detail" name="detail" rows="5" placeholder="お問い合わせ内容をご記載ください">{{ old('detail') }}</textarea>
                 <div class="form__error">
-                    @error('content')
+                    @error('detail')
                     {{ $message }}
                     @enderror
                 </div>

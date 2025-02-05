@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Contact;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(CategorySeeder::class); // categoriesのデータを呼び出し
-        $this->call(ContactSeeder::class); // ContactSeederを呼び出し
+        $this->call([
+            CategorySeeder::class,
+            ContactSeeder::class,
+        ]);
     }
 }
